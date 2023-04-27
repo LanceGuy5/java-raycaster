@@ -82,7 +82,7 @@ public class Raycaster extends Canvas implements Runnable{
         double delta = 0;
         long timer = System.currentTimeMillis();
         int updates = 0;
-        frames = 0;
+        int frames = 0;
         while(isRunning){
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -95,6 +95,7 @@ public class Raycaster extends Canvas implements Runnable{
             render();
             frames++;
             if(System.currentTimeMillis() - timer > 1000){
+                this.frames = frames;
                 timer += 1000;
                 frames = 0;
                 updates = 0;
@@ -124,8 +125,9 @@ public class Raycaster extends Canvas implements Runnable{
         calculator.render(g);
 
         g.setColor(Color.WHITE);
-        g.drawString("DIRECTION: " + camera.getDirection()[0] + ", " + camera.getDirection()[1], 10, 10);
-        g.drawString("POSITION: " + camera.getPose()[0] + ", " + camera.getPose()[1], 10, 20);
+        g.drawString("DIRECTION: " + camera.getDirection()[0] + ", " + camera.getDirection()[1], 5, 10);
+        g.drawString("POSITION: " + camera.getPose()[0] + ", " + camera.getPose()[1], 5, 20);
+        g.drawString("FRAMES PER SECOND: " + frames, 5, 30);
 
         //AND HERE
 
